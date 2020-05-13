@@ -21,8 +21,8 @@
 * Install Ganache for deployement of Contracts.
 
 ## Steps to run project : 
-1) Add ___truffle-config.js__ file in Ganache.
-2) Create new network in ___metamask___ with port number same as in ___truffle-config.js ___
+1) Add ___truffle-config.js___ file in Ganache.
+2) Create new network in ___metamask___ with port number same as in ___truffle-config.js___
 3) Configure Ganache with same port number.
 4) Goto Project Directory and run ___"truffle migrate"___ on command prompt.
 5) Goto Client directory and run ___"npm start"___ to start react server.
