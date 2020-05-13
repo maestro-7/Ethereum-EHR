@@ -3,6 +3,7 @@
 
 * "Truffle" v5.1.20
     * solc: "0.5.16"
+    
 * "Node" v12.16.1 (Install Following with npm)
   * "antd": "^3.9.0",
   * "axios": "^0.19.2",
@@ -15,9 +16,9 @@
   * "react-scripts": "3.2.0",
   * "web3": "1.2.2"
 
-Install Metamask as Google Chrome extension.
+* Install Metamask as Google Chrome extension.
 
-Install Ganache for deployement of Contracts.
+* Install Ganache for deployement of Contracts.
 
 ## Steps to run project : 
 1) Add ___truffle-config.js__ file in Ganache.
