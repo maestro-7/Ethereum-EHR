@@ -16,6 +16,7 @@
   * "web3": "1.2.2"
 
 Install Metamask as Google Chrome extension.
+
 Install Ganache for deployement of Contracts.
 
 ## Steps to run project : 
