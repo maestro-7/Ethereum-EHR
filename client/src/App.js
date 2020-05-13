@@ -1,7 +1,7 @@
+//Main Execution will start from this file.
+//Fistly all components will get mounted by componentsDidMount method and then render method will be called
+
 import React, { Component } from "react";
-// import SimpleStorageContract from "./contracts/SimpleStorage.json";
-// import DoctorContract from "./contracts/Doctor.json";
-// import PatientContract from "./contracts/Patient.json";
 import optHealthCare from "./contracts/optimized_healthCare.json"
 import getWeb3 from "./getWeb3";
 import DocLogin from "./Components/DocLogin";
@@ -17,13 +17,9 @@ class App extends Component {
   state = {  web3: null, accounts: null, contract: [],loggedAcc:null,loggedas:null};
   componentDidMount = async () => {
     try {
-      // // Get network provider and web3 instance.
-      // this.handleChange= this.handleChange.bind(this);
-      // this.handleSubmit= this.handleSubmit.bind(this);
-
+    
       var web3 = await getWeb3();
       var tmpcont=[];
-      // Use web3 to get the user's accounts.
       var accounts = await web3.eth.getAccounts();
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
@@ -34,17 +30,7 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
-      // deployedNetwork = PatientContract.networks[networkId];
-      // tmpcont['Pat'] = new web3.eth.Contract(
-      //   PatientContract.abi,
-      //   deployedNetwork && deployedNetwork.address,
-      // );
-      
-      
-      // console.log(networkId);
-      // web3.eth.net.getId().then(console.log);
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
+     //set State variables to derived values.
       this.setState({ web3, accounts, contract:tmpcont});
 
     } catch (error) {
@@ -54,47 +40,20 @@ class App extends Component {
       );
       console.error(error);
     }
-    console.log(this.state.accounts);
+    console.log(this.state.accounts);  // Reflect values on console
   };
   handleChange(event){
       this.setState({newValue: event.target.value});
   }
-  // async handleSubmit(event){
-  //   event.preventDefault(true);
-  //   const { accounts, contract } = this.state;
-    
-  //   await contract["SS"].methods.set(this.state.newValue).send({from:accounts[0]});
-  //   const response = await contract["SS"].methods.get().call({from :this.Acc[0]});
-  //   this.setState({ newValue: response });
-
-  // }
-  // runExample = async () => {
-  //   const { accounts, contract } = this.state;
-
-  //   // // Stores a given value, 5 by default.
-  //   // await contract.methods.set("").send({ from: accounts[0] });
-
-  //   // Get the value from the contract to prove it worked.
-  //   const response = await contract["SS"].methods.get().call({from :this.Acc[0]});
-
-  //   // Update state with the result.
-  //   this.setState({ newValue: response });
-  // };
-// async testAcc()
-// {
-//   var web3 = await getWeb3();
-//   var accounts = await web3.eth.getAccounts();
-//     console.log(accounts);
-//     console.log(this.state.accounts);
-// }
+ 
   render() {
-    //console.log(this.state.loggedas);
-    //this.loadcomponent();
-    //this.testAcc();
+    //console.log(this.state.loggedas);   //uncomment to check if comonents are loaded
     
     if (!this.state.web3) {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
+    //Html template will call register page or if already regestered login page will be open
+    //DocLogin file will be intiated
     return (
       <div className="App">
         <NavbarComp isLogged={this.state.loggedAcc} onlogout={()=>this.setState({loggedAcc:null,loggedas:null})}/>
