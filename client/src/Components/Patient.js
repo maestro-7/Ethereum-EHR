@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {  Button, Input, Upload,Icon, message, Row, Col, Tag, Card, Collapse } from 'antd';
-// import { connect } from "react-redux";
-//import { updateFileHash, getFileInfo } from "../utils/eth-util";
+
  import DisplayFiles from "./common/display_file";
 import ipfs from "./ipfs-util"
 import axios from "axios";
@@ -12,7 +11,6 @@ class Patient extends Component {
 
     constructor(props){
         super(props);
-        //this.onChange = this.onChange.bind(this);
     }
     contract =this.props.contract['OPT'];
     accounts =this.props.Acc;
@@ -33,10 +31,8 @@ class Patient extends Component {
     }
      updateFileHash = async (name,type,ipfshash) => {
         
-        // let res = await healthRecord.addFile
-        // .sendTransaction(filename, type, hash , "one", {"from":web3.eth.accounts[0]});
-        // let res = await this.contract.methods.addFile(filename, type, ipfshash, "one")
-        // .send( {"from":this.accounts[0]});
+       //sending transaction and storing result to state variables
+	     
         let res = await this.contract.methods.addUserFiles(name,type,ipfshash).send({"from":this.accounts[0]});
             console.log(res);
         if(res)
@@ -56,12 +52,7 @@ class Patient extends Component {
         //this.fileProps.onChange.bind(this);
     }
 
-    // componentWillReceiveProps (nextProps){
-    //     let { contract } = this.props.contract['OPT'];
-    //     //if(contract !== nextProps.contract['OPT']) {
-    //         this.loadPatient(nextProps.contract['OPT']);   
-    //     //}
-    // }
+
     async loadFiles(){
         const files = await this.contract.methods.getUserFiles(this.accounts[0]).call({from:this.accounts[0]});
         console.log('files',files);
@@ -70,7 +61,7 @@ class Patient extends Component {
 
     }
     async loadPatient (){
-        //console.log(contract);
+        //console.log(contract);  
         let res = await this.contract.methods.getPatientInfo().call({from :this.accounts[0]});
 
         this.setState({name:res[0],age:res[2],files:res[3],doctor_list:res[4]},
@@ -104,44 +95,7 @@ class Patient extends Component {
             this.setState({[type]:e.target.value});
     }
 
-    // fileProps = {
-    //     name: 'file',
-    //     multiple: true,
-    //     action: "/ipfs_upload",
-    //     beforeUpload: (file, fileList) => {
-    //         if(file.size > 5242880)// less than 5 MB
-    //             return false
-    //     },
-    //     headers: {secret: this.state.secret},
-    //     onChange: (info) => {
-    //         //QmQpeUrxtQE5N2SVog1ZCxd7c7RN4fBNQu5aLwkk5RY9ER
-    //         const status = info.file.status;
-    //         if (status !== 'uploading') {
-    //             console.log("abs");
-    //             console.log(info.file, info.fileList);
-    //         }
-    //         if (status === 'done') {
-    //             if(info.file.response){
-    //                 let { name, type, response } = info.file;
-
-    //                 if(response) {
-    //                     console.log('file uploaded successfully to ipfs');
-    //                     console.log('secret '+this.state.secret);
-    //                     this.updateFileHash(name, type, response, this.state.secret);
-    //                 }
-    //                 else
-    //                     console.log("file upload unsuccessful");
-    //             }
-    //             message.success(`${info.file.name} file uploaded successfully.`);
-    //         } else if (status === 'error') {
-    //             message.error(`${info.file.name} file upload failed.`);
-    //         }
-    //     }
-    // };
-
-    // togglePopUp(flag) {
-    //     this.setState({visible: flag});
-    // }
+  
     async uploadFile(event)
     {
         event.preventDefault();
@@ -179,10 +133,7 @@ class Patient extends Component {
 
     render() {
         let { name, age, files, doctor_list } = this.state;
-        // let { web3 } = this.props.global_vars;
-        // let { token } = this.props.auth;
-        // this.fileProps.headers.secret = this.state.secret
-        // this.fileProps.onChange.bind(this);
+        // after loading patient's info html template will diplay along with files
         this.uploadFile.bind(this);
         this.getFile.bind(this);
         //this.loadPatient();
