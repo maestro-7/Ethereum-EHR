@@ -1,0 +1,18 @@
+.form{
+    background-color: aqua;
+    height: 50%;
+    width: 50%;
+    top:20%;
+}
+.button{
+    padding:5px;
+    margin:10px;
+}
+.label{
+    width: 200px;
+    
+}
+.label,input{
+    display: inline-block;
+    margin:2px;
+}
